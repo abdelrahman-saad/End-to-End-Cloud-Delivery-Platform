@@ -42,6 +42,40 @@ pipeline {
             }
         }
 
+        stage('Trivy Image Scan') {
+            steps {
+                sh '''
+                    mkdir -p trivy-reports
+
+                    docker run --rm \
+                      -v /var/run/docker.sock:/var/run/docker.sock \
+                      -v "$PWD/trivy-reports:/reports" \
+                      aquasec/trivy:latest image \
+                      --severity HIGH,CRITICAL \
+                      --no-progress \
+                      --format table \
+                      --output /reports/backend-trivy-report.txt \
+                      ${BACKEND_IMAGE}:${IMAGE_TAG} || true
+
+                    docker run --rm \
+                      -v /var/run/docker.sock:/var/run/docker.sock \
+                      -v "$PWD/trivy-reports:/reports" \
+                      aquasec/trivy:latest image \
+                      --severity HIGH,CRITICAL \
+                      --no-progress \
+                      --format table \
+                      --output /reports/frontend-trivy-report.txt \
+                      ${FRONTEND_IMAGE}:${IMAGE_TAG} || true
+
+                    echo "========== Backend Trivy Report =========="
+                    cat trivy-reports/backend-trivy-report.txt || true
+
+                    echo "========== Frontend Trivy Report =========="
+                    cat trivy-reports/frontend-trivy-report.txt || true
+                '''
+            }
+        }
+
         stage('DockerHub Login') {
             steps {
                 sh '''
@@ -69,7 +103,7 @@ pipeline {
         }
 
         success {
-            echo 'Pipeline completed successfully. Images pushed to DockerHub.'
+            echo 'Pipeline completed successfully. Images scanned by Trivy and pushed to DockerHub.'
         }
 
         failure {
