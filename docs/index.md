@@ -21,7 +21,7 @@
 ---
 ## Overview
 
-This documentation explains the complete DEPI DevSecOps project built on AWS using Jenkins, Docker, Trivy, DockerHub, K3s Kubernetes, and ArgoCD GitOps.
+This documentation explains the complete DEPI DevSecOps project built on AWS using Jenkins, Gitleaks, SonarQube, Docker, Trivy, DockerHub, K3s Kubernetes, and ArgoCD GitOps.
 
 ## Live Services
 
@@ -41,7 +41,7 @@ This documentation explains the complete DEPI DevSecOps project built on AWS usi
 | Database | PostgreSQL |
 | CI | Jenkins |
 | Registry | DockerHub |
-| Security | Trivy |
+| Security | Gitleaks, SonarQube, Trivy |
 | Kubernetes | K3s |
 | GitOps | ArgoCD |
 | DNS | DuckDNS |

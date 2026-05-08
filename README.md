@@ -5,7 +5,7 @@
 <h1 align="center">DEPI DevSecOps Project — MIND Notes App</h1>
 
 <p align="center">
-  <strong>GitHub → Jenkins → Docker → Trivy → DockerHub → ArgoCD → K3s Kubernetes</strong>
+  <strong>GitHub → Jenkins → Gitleaks → SonarQube → Docker Build → Trivy → DockerHub → ArgoCD → K3s Kubernetes</strong>
 </p>
 
 <p align="center">
@@ -49,7 +49,7 @@ The application consists of:
 | Database | PostgreSQL |
 | CI | Jenkins |
 | Image Registry | DockerHub |
-| Security Scan | Trivy |
+| Security Scans | Gitleaks, SonarQube, Trivy |
 | Kubernetes | K3s on AWS EC2 |
 | GitOps CD | ArgoCD |
 | Dynamic DNS | DuckDNS |
@@ -278,6 +278,8 @@ This project successfully demonstrates:
 - Jenkins CI automation
 - Docker image build and tagging
 - DockerHub image publishing
+- Gitleaks secret scanning
+- SonarQube code quality scanning
 - Trivy vulnerability scanning
 - Kubernetes deployment using K3s
 - Persistent PostgreSQL storage with PVC
