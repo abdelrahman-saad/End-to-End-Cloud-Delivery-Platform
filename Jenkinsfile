@@ -32,18 +32,18 @@ pipeline {
                     mkdir -p gitleaks-reports
 
                     echo "========== Gitleaks Secret Scan =========="
+
                     docker run --rm \
                       -v "$PWD:/repo" \
                       ghcr.io/gitleaks/gitleaks:latest detect \
                       --source /repo \
                       --no-git \
-                      --report-format json \
-                      --report-path /repo/gitleaks-reports/gitleaks-report.json \
                       --redact \
-                      --verbose || true
+                      --verbose \
+                      --exit-code 0 | tee gitleaks-reports/gitleaks-console-report.txt || true
 
                     echo "========== Gitleaks Report =========="
-                    cat gitleaks-reports/gitleaks-report.json || true
+                    cat gitleaks-reports/gitleaks-console-report.txt || true
                 '''
             }
         }
