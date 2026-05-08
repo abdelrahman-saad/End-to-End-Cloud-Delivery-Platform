@@ -60,7 +60,7 @@ pipeline {
                           sonarsource/sonar-scanner-cli:latest \
                           -Dsonar.projectKey=depi-mind-app-v2 \
                           -Dsonar.projectName="DEPI MIND App" \
-                          -Dsonar.sources=/usr/src/MIND/backend,/usr/src/MIND/frontend \
+                          -Dsonar.sources=MIND/backend,MIND/frontend \
                           -Dsonar.host.url=http://localhost:9000 \
                           -Dsonar.token=$SONAR_TOKEN \
                           -Dsonar.exclusions=**/node_modules/**,**/dist/**,**/build/**,**/.git/**,**/vendor/** || true
