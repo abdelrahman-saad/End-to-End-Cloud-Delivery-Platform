@@ -1,131 +1,89 @@
-# Project Screenshots
-
-This page contains visual proof of the complete DEPI DevSecOps workflow, from source code to CI/CD, security scanning, DockerHub publishing, Kubernetes deployment, ArgoCD GitOps, and self-healing validation.
-
----
-
-## 1. GitHub Repository
-
-The GitHub repository contains the application source code, Jenkins pipeline, Kubernetes manifests, MkDocs documentation, and GitHub Pages workflow.
-
-![GitHub Repository](screenshots/github-repo.png)
-
----
-
-## 2. MkDocs Documentation Website
-
-The project documentation is published using MkDocs Material and GitHub Pages.
-
-![MkDocs Home](screenshots/mkdocs-home.png)
-
----
-
-## 3. Jenkins Dashboard
-
-Jenkins is running on AWS EC2 and contains the CI pipeline job for the MIND application.
-
-![Jenkins Dashboard](screenshots/jenkins-dashboard.png)
-
----
-
-## 4. Jenkins Successful Build
-
-The Jenkins pipeline completed successfully and pushed Docker images to DockerHub.
-
-![Jenkins Build Success](screenshots/jenkins-build-success.png)
-
----
-
-## 5. Jenkins Gitleaks Secret Scan
-
-The Jenkins pipeline runs Gitleaks before building Docker images to check the repository for leaked secrets. Build #5 completed with no leaks found.
-
-![Jenkins Gitleaks Console](screenshots/jenkins-gitleaks-console.png)
-
----
-
-## 6. Jenkins Trivy Scan Output
-
-Trivy security scanning is integrated into the Jenkins pipeline in report-only mode.
-
-![Jenkins Trivy Console](screenshots/jenkins-trivy-console.png)
-
----
-
-## 7. DockerHub Backend Image
-
-The backend Docker image was built by Jenkins and pushed to DockerHub with versioned tags.
-
-![DockerHub Backend](screenshots/dockerhub-backend.png)
-
----
-
-## 8. DockerHub Frontend Image
-
-The frontend Docker image was built by Jenkins and pushed to DockerHub with versioned tags.
-
-![DockerHub Frontend](screenshots/dockerhub-frontend.png)
-
----
-
-## 9. K3s Kubernetes Resources
-
-The application is deployed on a single-node K3s Kubernetes cluster running on AWS EC2.
-
-![K3s Pods and Services](screenshots/k3s-pods.png)
-
----
-
-## 10. MIND App Running
-
-The MIND Notes App is publicly accessible through the K3s NodePort service and DuckDNS.
-
-![MIND App](screenshots/mind-app.png)
-
----
-
-## 11. API Health Check
-
-The backend API health endpoint confirms that the frontend proxy and backend service are working.
-
-![API Health](screenshots/api-health.png)
-
----
-
-## 12. ArgoCD Synced and Healthy
-
-ArgoCD manages the Kubernetes deployment from the GitHub repository and keeps the application synced.
-
-![ArgoCD Synced](screenshots/argocd-synced.png)
-
----
-
-## 13. ArgoCD Self-Healing Test
-
-A live drift test was performed by scaling the frontend deployment to zero replicas. ArgoCD detected the drift and restored the application back to the desired state from Git.
-
-![ArgoCD Self Heal](screenshots/argocd-self-heal.png)
-
----
-
-## 13. Jenkins Build #8 Success
-
-Build #8 completed successfully after adding Gitleaks and SonarQube code scanning to the Jenkins pipeline.
-
-![Jenkins Build 8 Success](screenshots/jenkins-build-8-success.png)
-
----
-
-## 14. Jenkins SonarQube Scan Output
-
-The Jenkins pipeline successfully executed the SonarQube code scan and uploaded the analysis report.
-
-![Jenkins SonarQube Console](screenshots/jenkins-sonarqube-console.png)
-
----
-
-## 15. SonarQube Dashboard
-
-SonarQube created the DEPI MIND App project and shows the quality gate as passed.
-
-![SonarQube Dashboard](screenshots/sonarqube-dashboard.png)
+# Screenshots Evidence
+
+<div class="depi-hero">
+  <div class="depi-eyebrow">Visual Evidence</div>
+  <h1>Project screenshots and proof</h1>
+  <p>
+    This page collects the screenshots that prove the full workflow from GitHub to Jenkins,
+    DockerHub, K3s, ArgoCD, SonarQube, and the running application.
+  </p>
+</div>
+
+<div class="screenshot-grid">
+
+<figure class="shot">
+  <img src="screenshots/github-repo.png" alt="GitHub Repository" />
+  <figcaption>GitHub Repository</figcaption>
+</figure>
+
+<figure class="shot">
+  <img src="screenshots/mkdocs-home.png" alt="MkDocs Documentation" />
+  <figcaption>MkDocs Documentation</figcaption>
+</figure>
+
+<figure class="shot">
+  <img src="screenshots/jenkins-dashboard.png" alt="Jenkins Dashboard" />
+  <figcaption>Jenkins Dashboard</figcaption>
+</figure>
+
+<figure class="shot">
+  <img src="screenshots/jenkins-build-8-success.png" alt="Jenkins Build 8 Success" />
+  <figcaption>Jenkins Build #8 Success</figcaption>
+</figure>
+
+<figure class="shot">
+  <img src="screenshots/jenkins-gitleaks-console.png" alt="Gitleaks Console" />
+  <figcaption>Gitleaks Secret Scan</figcaption>
+</figure>
+
+<figure class="shot">
+  <img src="screenshots/jenkins-sonarqube-console.png" alt="SonarQube Console" />
+  <figcaption>SonarQube Jenkins Scan</figcaption>
+</figure>
+
+<figure class="shot">
+  <img src="screenshots/sonarqube-dashboard.png" alt="SonarQube Dashboard" />
+  <figcaption>SonarQube Dashboard</figcaption>
+</figure>
+
+<figure class="shot">
+  <img src="screenshots/jenkins-trivy-console.png" alt="Trivy Console" />
+  <figcaption>Trivy Image Scan</figcaption>
+</figure>
+
+<figure class="shot">
+  <img src="screenshots/dockerhub-backend.png" alt="DockerHub Backend" />
+  <figcaption>DockerHub Backend Image</figcaption>
+</figure>
+
+<figure class="shot">
+  <img src="screenshots/dockerhub-frontend.png" alt="DockerHub Frontend" />
+  <figcaption>DockerHub Frontend Image</figcaption>
+</figure>
+
+<figure class="shot">
+  <img src="screenshots/k3s-pods.png" alt="K3s Pods" />
+  <figcaption>K3s Pods and Services</figcaption>
+</figure>
+
+<figure class="shot">
+  <img src="screenshots/mind-app.png" alt="MIND App" />
+  <figcaption>MIND App Running</figcaption>
+</figure>
+
+<figure class="shot">
+  <img src="screenshots/api-health.png" alt="API Health" />
+  <figcaption>API Health 200 OK</figcaption>
+</figure>
+
+<figure class="shot">
+  <img src="screenshots/argocd-synced.png" alt="ArgoCD Synced" />
+  <figcaption>ArgoCD Synced / Healthy</figcaption>
+</figure>
+
+<figure class="shot">
+  <img src="screenshots/argocd-self-heal.png" alt="ArgoCD Self-Heal" />
+  <figcaption>ArgoCD Self-Healing Test</figcaption>
+</figure>
+
+</div>

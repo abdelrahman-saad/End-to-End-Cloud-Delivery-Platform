@@ -1,5 +1,5 @@
 site_name: DEPI DevSecOps Project
-site_description: MIND Notes App DevSecOps project using Jenkins, Docker, Trivy, K3s, and ArgoCD
+site_description: Premium documentation portal for the MIND Notes App DevSecOps project using Jenkins, Gitleaks, SonarQube, Docker, Trivy, DockerHub, K3s, and ArgoCD
 site_author: Fady Mounir
 repo_url: https://github.com/fadyy2k/depi-mind-app-v2
 repo_name: fadyy2k/depi-mind-app-v2
@@ -8,15 +8,22 @@ theme:
   name: material
   logo: assets/logo.svg
   favicon: assets/logo.svg
+  language: en
   features:
     - navigation.tabs
     - navigation.sections
+    - navigation.path
     - navigation.top
     - navigation.footer
+    - navigation.indexes
+    - toc.follow
+    - toc.integrate
     - content.code.copy
+    - content.code.annotate
     - content.tabs.link
     - search.highlight
     - search.suggest
+    - search.share
   palette:
     - scheme: slate
       primary: indigo
@@ -30,11 +37,25 @@ theme:
       toggle:
         icon: material/weather-night
         name: Switch to dark mode
+  font:
+    text: Inter
+    code: JetBrains Mono
+
+extra_css:
+  - assets/stylesheets/extra.css
+
+extra:
+  social:
+    - icon: fontawesome/brands/github
+      link: https://github.com/fadyy2k/depi-mind-app-v2
 
 markdown_extensions:
   - admonition
   - attr_list
   - md_in_html
+  - tables
+  - def_list
+  - footnotes
   - pymdownx.details
   - pymdownx.superfences:
       custom_fences:
@@ -45,7 +66,9 @@ markdown_extensions:
       alternate_style: true
   - pymdownx.tasklist:
       custom_checkbox: true
-  - tables
+  - pymdownx.emoji:
+      emoji_index: !!python/name:material.extensions.emoji.twemoji
+      emoji_generator: !!python/name:material.extensions.emoji.to_svg
   - toc:
       permalink: true
 
@@ -58,3 +81,4 @@ nav:
   - ArgoCD GitOps: argocd.md
   - Operations: operations.md
   - Screenshots: screenshots.md
+  - Professor Q&A: professor-qa.md

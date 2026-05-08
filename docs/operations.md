@@ -1,17 +1,14 @@
 # Operations
 
-## DuckDNS
+<div class="depi-hero">
+  <div class="depi-eyebrow">Runbook</div>
+  <h1>Operational commands and demo checks</h1>
+  <p>
+    These commands are useful for validating the project during review or demo.
+  </p>
+</div>
 
-DuckDNS is used to avoid hardcoding changing AWS public IPs.
-
-| Service | DuckDNS URL |
-|---|---|
-| Jenkins | depi-jenkins-depi.duckdns.org |
-| K3s/App/ArgoCD | depi-k3s-depi.duckdns.org |
-
-Both EC2 servers run a cron job every 5 minutes to update DuckDNS.
-
-## Final Validation
+## Kubernetes Validation
 
 ```bash
 kubectl get nodes -o wide
@@ -21,9 +18,29 @@ kubectl get application mind-app -n argocd
 curl -i http://localhost:30080/api/health
 ```
 
-Expected result:
+## Jenkins Server Checks
 
-- Node Ready
-- All MIND pods Running
-- ArgoCD Synced / Healthy
-- API health 200 OK
+```bash
+docker ps
+curl -I http://localhost:8080
+curl -I http://localhost:9000
+```
+
+## DuckDNS Checks
+
+```bash
+dig +short depi-jenkins-depi.duckdns.org
+dig +short depi-k3s-depi.duckdns.org
+```
+
+## Demo Login
+
+| Service | Access |
+|---|---|
+| Jenkins | No login required |
+| MIND App | `demo@example.com` / `demo123456` |
+| ArgoCD | Demo credentials only |
+| SonarQube | Demo credentials only |
+
+!!! warning "Do not publish secrets"
+    Keep ArgoCD, SonarQube, DockerHub, GitHub, SSH, and AWS credentials private.

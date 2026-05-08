@@ -1,39 +1,50 @@
 # ArgoCD GitOps
 
-## ArgoCD Application
-
-| Field | Value |
-|---|---|
-| Name | mind-app |
-| Repo | https://github.com/fadyy2k/depi-mind-app-v2.git |
-| Path | k8s |
-| Branch | main |
-| Namespace | mind |
-| Sync | Automated |
-| Prune | Enabled |
-| Self-Heal | Enabled |
+<div class="depi-hero">
+  <div class="depi-eyebrow">GitOps Delivery</div>
+  <h1>ArgoCD keeps Kubernetes synced with Git</h1>
+  <p>
+    ArgoCD watches the GitHub repository and applies the Kubernetes manifests to the K3s cluster.
+  </p>
+</div>
 
 ## GitOps Flow
 
 ```mermaid
 flowchart LR
-    A[GitHub k8s manifests] --> B[ArgoCD]
-    B --> C[K3s Cluster]
-    C --> D[Desired State Applied]
-    D --> E[App Healthy]
+  GH[GitHub Kubernetes Manifests] --> AR[ArgoCD Application]
+  AR --> K3S[K3s Cluster]
+  K3S --> APP[MIND App]
+  Drift[Manual Drift] --> AR
+  AR --> Heal[Self-Healing Restore]
 ```
+
+## ArgoCD Settings
+
+| Setting | Value |
+|---|---|
+| Sync | Automated |
+| Prune | Enabled |
+| Self-heal | Enabled |
+| Target cluster | K3s server |
+| Application status | Synced / Healthy |
 
 ## Self-Healing Test
 
-Manual drift was created with:
+A live drift test was performed:
 
 ```bash
 kubectl scale deployment mind-frontend -n mind --replicas=0
 ```
 
-ArgoCD restored the desired state automatically.
+ArgoCD detected that the live cluster no longer matched the Git desired state and restored the frontend deployment.
 
-Final status:
+## Result
 
-- mind-frontend: 1/1 Running
-- mind-app: Synced / Healthy
+| Resource | Result |
+|---|---|
+| `mind-frontend` | Restored to `1/1 Running` |
+| `mind-app` | Synced / Healthy |
+
+!!! success "GitOps proof"
+    This proves Git is the source of truth and ArgoCD can automatically repair unauthorized drift.
