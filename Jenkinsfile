@@ -56,7 +56,8 @@ pipeline {
 
                         docker run --rm \
                           --network host \
-                          -v "$PWD:/usr/src" \
+                          --volumes-from "$HOSTNAME" \
+                          -w "$PWD" \
                           sonarsource/sonar-scanner-cli:latest \
                           -Dsonar.projectKey=depi-mind-app-v2 \
                           -Dsonar.projectName="DEPI MIND App" \
