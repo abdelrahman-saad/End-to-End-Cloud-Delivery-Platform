@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from "react";
+﻿import React, { useMemo, useState } from "react";
 import { createRoot } from "react-dom/client";
 import {
   Activity,
@@ -9,7 +9,6 @@ import {
   Database,
   ExternalLink,
   GitBranch,
-  Github,
   Layers,
   Lock,
   Network,
@@ -39,8 +38,8 @@ import {
 import "./styles.css";
 
 const liveLinks = [
-  ["GitHub Repository", "https://github.com/fadyy2k/depi-mind-app-v2", "Public"],
-  ["MkDocs Site", "https://fadyy2k.github.io/depi-mind-app-v2/", "Public"],
+  ["GitBranch Repository", "https://GitBranch.com/fadyy2k/depi-mind-app-v2", "Public"],
+  ["MkDocs Site", "https://fadyy2k.GitBranch.io/depi-mind-app-v2/", "Public"],
   ["Jenkins", "http://depi-jenkins-depi.duckdns.org:8080", "No login required"],
   ["MIND App", "http://depi-k3s-depi.duckdns.org:30080", "demo@example.com / demo123456"],
   ["API Health", "http://depi-k3s-depi.duckdns.org:30080/api/health", "Public health endpoint"],
@@ -51,16 +50,16 @@ const liveLinks = [
 ];
 
 const pipelineStages = [
-  ["Checkout", "GitHub — Pull source code from repository"],
-  ["Show Workspace", "Jenkins — Validate workspace and folder structure"],
-  ["Gitleaks Secret Scan", "Gitleaks — Detect leaked secrets before build"],
-  ["SonarQube Code Scan", "SonarQube — Analyze code quality and maintainability"],
-  ["Build Backend Image", "Docker — Build Go backend image"],
-  ["Build Frontend Image", "Docker — Build React/Nginx frontend image"],
-  ["Trivy Image Scan", "Trivy — Scan Docker images for vulnerabilities"],
-  ["DockerHub Login", "DockerHub — Authenticate using Jenkins credentials"],
-  ["Push Images", "DockerHub — Push versioned and latest image tags"],
-  ["Docker Logout", "Jenkins — Clean registry session"]
+  ["Checkout", "GitBranch â€” Pull source code from repository"],
+  ["Show Workspace", "Jenkins â€” Validate workspace and folder structure"],
+  ["Gitleaks Secret Scan", "Gitleaks â€” Detect leaked secrets before build"],
+  ["SonarQube Code Scan", "SonarQube â€” Analyze code quality and maintainability"],
+  ["Build Backend Image", "Docker â€” Build Go backend image"],
+  ["Build Frontend Image", "Docker â€” Build React/Nginx frontend image"],
+  ["Trivy Image Scan", "Trivy â€” Scan Docker images for vulnerabilities"],
+  ["DockerHub Login", "DockerHub â€” Authenticate using Jenkins credentials"],
+  ["Push Images", "DockerHub â€” Push versioned and latest image tags"],
+  ["Docker Logout", "Jenkins â€” Clean registry session"]
 ];
 
 const buildTrend = [
@@ -95,8 +94,8 @@ const k8sResources = [
 ];
 
 const screenshots = [
-  "GitHub repository with README and docs",
-  "MkDocs GitHub Pages website",
+  "GitBranch repository with README and docs",
+  "MkDocs GitBranch Pages website",
   "Jenkins dashboard",
   "Jenkins Build #8 success",
   "Jenkins Gitleaks console output",
@@ -156,24 +155,24 @@ function Hero() {
   return (
     <section className="hero">
       <div>
-        <p className="eyebrow">AWS • Jenkins • Kubernetes • GitOps • DevSecOps</p>
-        <h1>DEPI DevSecOps Project — MIND Notes App</h1>
+        <p className="eyebrow">AWS â€¢ Jenkins â€¢ Kubernetes â€¢ GitOps â€¢ DevSecOps</p>
+        <h1>DEPI DevSecOps Project â€” MIND Notes App</h1>
         <p className="hero-copy">
           A complete DevSecOps workflow deployed on AWS EC2 using Jenkins CI, Docker images,
           security scanning, DockerHub registry, K3s Kubernetes, and ArgoCD GitOps self-healing.
         </p>
         <div className="hero-actions">
-          <ExternalAnchor href="https://github.com/fadyy2k/depi-mind-app-v2">GitHub Repo</ExternalAnchor>
-          <ExternalAnchor href="https://fadyy2k.github.io/depi-mind-app-v2/">MkDocs Site</ExternalAnchor>
+          <ExternalAnchor href="https://GitBranch.com/fadyy2k/depi-mind-app-v2">GitBranch Repo</ExternalAnchor>
+          <ExternalAnchor href="https://fadyy2k.GitBranch.io/depi-mind-app-v2/">MkDocs Site</ExternalAnchor>
           <ExternalAnchor href="http://depi-k3s-depi.duckdns.org:30080">Live App</ExternalAnchor>
         </div>
       </div>
 
       <div className="hero-panel">
         <h3>Final Toolchain</h3>
-        <p>GitHub → Jenkins → Gitleaks → SonarQube → Docker Build → Trivy → DockerHub → ArgoCD → K3s Kubernetes</p>
+        <p>GitBranch â†’ Jenkins â†’ Gitleaks â†’ SonarQube â†’ Docker Build â†’ Trivy â†’ DockerHub â†’ ArgoCD â†’ K3s Kubernetes</p>
         <div className="chip-row">
-          {["GitHub", "Jenkins", "Gitleaks", "SonarQube", "Docker", "Trivy", "DockerHub", "ArgoCD", "K3s"].map((item) => (
+          {["GitBranch", "Jenkins", "Gitleaks", "SonarQube", "Docker", "Trivy", "DockerHub", "ArgoCD", "K3s"].map((item) => (
             <span className="chip" key={item}>{item}</span>
           ))}
         </div>
@@ -210,7 +209,7 @@ function Overview() {
             </tbody>
           </table>
         </div>
-        <p className="security-note">Security note: do not publish real admin passwords, private keys, tokens, or cloud credentials in a public repository or public Vercel/GitHub Pages app.</p>
+        <p className="security-note">Security note: do not publish real admin passwords, private keys, tokens, or cloud credentials in a public repository or public Vercel/GitBranch Pages app.</p>
       </div>
     </section>
   );
@@ -218,17 +217,17 @@ function Overview() {
 
 function Ec2ArchitectureDiagram() {
   const leftServices = [
-    ["Jenkins", "Port 8080 — CI pipeline automation"],
+    ["Jenkins", "Port 8080 â€” CI pipeline automation"],
     ["Docker Engine", "Builds backend and frontend images"],
     ["Gitleaks", "Scans repository for leaked secrets before build"],
-    ["SonarQube", "Port 9000 — static code analysis and quality gate"],
+    ["SonarQube", "Port 9000 â€” static code analysis and quality gate"],
     ["Trivy", "Scans Docker images for vulnerabilities"],
-    ["MkDocs / GitHub Pages", "Documentation generated and published from repo"]
+    ["MkDocs / GitBranch Pages", "Documentation generated and published from repo"]
   ];
 
   const rightServices = [
     ["K3s Kubernetes", "Single-node Kubernetes cluster"],
-    ["ArgoCD", "Port 32000 — GitOps sync and self-healing"],
+    ["ArgoCD", "Port 32000 â€” GitOps sync and self-healing"],
     ["MIND Frontend", "React + Nginx exposed on NodePort 30080"],
     ["MIND Backend", "Go API service with /api/health endpoint"],
     ["PostgreSQL", "Database pod with PVC persistent storage"],
@@ -259,9 +258,9 @@ function Ec2ArchitectureDiagram() {
 
           <div className="connection-column">
             {[
-              "GitHub push triggers Jenkins pipeline",
+              "GitBranch push triggers Jenkins pipeline",
               "Jenkins builds and pushes Docker images",
-              "ArgoCD watches GitHub Kubernetes manifests",
+              "ArgoCD watches GitBranch Kubernetes manifests",
               "K3s pulls images from DockerHub and runs app"
             ].map((text, index) => (
               <div className="flow-arrow" key={text}><span>{index + 1}</span>{text}</div>
@@ -282,14 +281,14 @@ function Ec2ArchitectureDiagram() {
 
         <div className="workflow-map">
           <h3>End-to-End Workflow</h3>
-          <WorkflowRow nodes={["Developer", "GitHub Repo", "Jenkins", "DockerHub"]} labels={["push code", "checkout", "scan + build"]} />
-          <WorkflowRow nodes={["GitHub k8s Manifests", "ArgoCD", "K3s Cluster", "MIND App"]} labels={["watched by", "syncs desired state", "runs"]} />
+          <WorkflowRow nodes={["Developer", "GitBranch Repo", "Jenkins", "DockerHub"]} labels={["push code", "checkout", "scan + build"]} />
+          <WorkflowRow nodes={["GitBranch k8s Manifests", "ArgoCD", "K3s Cluster", "MIND App"]} labels={["watched by", "syncs desired state", "runs"]} />
           <WorkflowRow nodes={["Manual Drift", "ArgoCD", "Healthy State"]} labels={["detected by", "restores"]} special />
         </div>
 
         <div className="explain-grid">
           <div><h3>Why Two EC2 Servers?</h3><p>The Jenkins EC2 separates CI/CD and scanning workloads from the runtime environment. The K3s EC2 acts as the production-like Kubernetes environment where the application runs.</p></div>
-          <div><h3>How They Work Together</h3><p>Jenkins builds and publishes images to DockerHub. ArgoCD applies Kubernetes manifests from GitHub, and K3s pulls the required images to run the frontend, backend, and PostgreSQL services.</p></div>
+          <div><h3>How They Work Together</h3><p>Jenkins builds and publishes images to DockerHub. ArgoCD applies Kubernetes manifests from GitBranch, and K3s pulls the required images to run the frontend, backend, and PostgreSQL services.</p></div>
           <div><h3>How Self-Healing Works</h3><p>When the frontend deployment was manually scaled to zero replicas, ArgoCD detected that the live state no longer matched Git and restored the deployment automatically.</p></div>
         </div>
       </div>
@@ -333,8 +332,8 @@ function ArchitectureSummary() {
     <section className="section">
       <h2><Server size={24} /> Architecture & Infrastructure Summary</h2>
       <div className="chain">
-        {["GitHub", "Jenkins", "Gitleaks", "SonarQube", "Docker Build", "Trivy", "DockerHub", "ArgoCD", "K3s", "MIND App"].map((item) => (
-          <React.Fragment key={item}><span>{item}</span><b>→</b></React.Fragment>
+        {["GitBranch", "Jenkins", "Gitleaks", "SonarQube", "Docker Build", "Trivy", "DockerHub", "ArgoCD", "K3s", "MIND App"].map((item) => (
+          <React.Fragment key={item}><span>{item}</span><b>â†’</b></React.Fragment>
         ))}
       </div>
 
@@ -563,9 +562,11 @@ function App() {
       <Evidence />
       <Qna />
       <ProductionNote />
-      <footer>DEPI DevSecOps Project Showcase — MIND Notes App</footer>
+      <footer>DEPI DevSecOps Project Showcase â€” MIND Notes App</footer>
     </main>
   );
 }
 
 createRoot(document.getElementById("root")).render(<App />);
+
+
