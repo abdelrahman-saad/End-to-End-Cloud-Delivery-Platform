@@ -19,6 +19,21 @@
 
 ---
 
+
+## Project Demo Links
+
+| Service | URL |
+|---|---|
+| GitHub Repository | https://github.com/fadyy2k/depi-mind-app-v2 |
+| Live Documentation | https://fadyy2k.github.io/depi-mind-app-v2/ |
+| Jenkins | http://depi-jenkins-depi.duckdns.org:8080 |
+| MIND App | http://depi-k3s-depi.duckdns.org:30080 |
+| API Health | http://depi-k3s-depi.duckdns.org:30080/api/health |
+| ArgoCD | http://depi-k3s-depi.duckdns.org:32000 |
+| DockerHub Backend | https://hub.docker.com/r/fadyy2k/mind-backend |
+| DockerHub Frontend | https://hub.docker.com/r/fadyy2k/mind-frontend |
+
+---
 ## 🚀 Project Overview
 
 This project demonstrates a complete **DevSecOps delivery pipeline** for the **MIND Notes App** using AWS EC2, Jenkins, Docker, Trivy, DockerHub, K3s Kubernetes, and ArgoCD GitOps.
