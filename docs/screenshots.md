@@ -105,3 +105,27 @@ ArgoCD manages the Kubernetes deployment from the GitHub repository and keeps th
 A live drift test was performed by scaling the frontend deployment to zero replicas. ArgoCD detected the drift and restored the application back to the desired state from Git.
 
 ![ArgoCD Self Heal](screenshots/argocd-self-heal.png)
+
+---
+
+## 13. Jenkins Build #8 Success
+
+Build #8 completed successfully after adding Gitleaks and SonarQube code scanning to the Jenkins pipeline.
+
+![Jenkins Build 8 Success](screenshots/jenkins-build-8-success.png)
+
+---
+
+## 14. Jenkins SonarQube Scan Output
+
+The Jenkins pipeline successfully executed the SonarQube code scan and uploaded the analysis report.
+
+![Jenkins SonarQube Console](screenshots/jenkins-sonarqube-console.png)
+
+---
+
+## 15. SonarQube Dashboard
+
+SonarQube created the DEPI MIND App project and shows the quality gate as passed.
+
+![SonarQube Dashboard](screenshots/sonarqube-dashboard.png)
