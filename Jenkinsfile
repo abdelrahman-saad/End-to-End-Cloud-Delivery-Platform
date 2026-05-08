@@ -47,31 +47,23 @@ pipeline {
                 sh '''
                     mkdir -p trivy-reports
 
+                    echo "========== Backend Trivy Scan =========="
                     docker run --rm \
                       -v /var/run/docker.sock:/var/run/docker.sock \
-                      -v "$PWD/trivy-reports:/reports" \
                       aquasec/trivy:latest image \
                       --severity HIGH,CRITICAL \
                       --no-progress \
                       --format table \
-                      --output /reports/backend-trivy-report.txt \
-                      ${BACKEND_IMAGE}:${IMAGE_TAG} || true
+                      ${BACKEND_IMAGE}:${IMAGE_TAG} | tee trivy-reports/backend-trivy-report.txt || true
 
+                    echo "========== Frontend Trivy Scan =========="
                     docker run --rm \
                       -v /var/run/docker.sock:/var/run/docker.sock \
-                      -v "$PWD/trivy-reports:/reports" \
                       aquasec/trivy:latest image \
                       --severity HIGH,CRITICAL \
                       --no-progress \
                       --format table \
-                      --output /reports/frontend-trivy-report.txt \
-                      ${FRONTEND_IMAGE}:${IMAGE_TAG} || true
-
-                    echo "========== Backend Trivy Report =========="
-                    cat trivy-reports/backend-trivy-report.txt || true
-
-                    echo "========== Frontend Trivy Report =========="
-                    cat trivy-reports/frontend-trivy-report.txt || true
+                      ${FRONTEND_IMAGE}:${IMAGE_TAG} | tee trivy-reports/frontend-trivy-report.txt || true
                 '''
             }
         }
