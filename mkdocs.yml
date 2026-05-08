@@ -1,0 +1,60 @@
+site_name: DEPI DevSecOps Project
+site_description: MIND Notes App DevSecOps project using Jenkins, Docker, Trivy, K3s, and ArgoCD
+site_author: Fady Mounir
+repo_url: https://github.com/fadyy2k/depi-mind-app-v2
+repo_name: fadyy2k/depi-mind-app-v2
+
+theme:
+  name: material
+  logo: assets/logo.svg
+  favicon: assets/logo.svg
+  features:
+    - navigation.tabs
+    - navigation.sections
+    - navigation.top
+    - navigation.footer
+    - content.code.copy
+    - content.tabs.link
+    - search.highlight
+    - search.suggest
+  palette:
+    - scheme: slate
+      primary: indigo
+      accent: cyan
+      toggle:
+        icon: material/weather-sunny
+        name: Switch to light mode
+    - scheme: default
+      primary: indigo
+      accent: cyan
+      toggle:
+        icon: material/weather-night
+        name: Switch to dark mode
+
+markdown_extensions:
+  - admonition
+  - attr_list
+  - md_in_html
+  - pymdownx.details
+  - pymdownx.superfences:
+      custom_fences:
+        - name: mermaid
+          class: mermaid
+          format: !!python/name:pymdownx.superfences.fence_code_format
+  - pymdownx.tabbed:
+      alternate_style: true
+  - pymdownx.tasklist:
+      custom_checkbox: true
+  - tables
+  - toc:
+      permalink: true
+
+nav:
+  - Home: index.md
+  - Architecture: architecture.md
+  - CI/CD Pipeline: cicd.md
+  - Security Scanning: security.md
+  - Kubernetes: kubernetes.md
+  - ArgoCD GitOps: argocd.md
+  - Operations: operations.md
+  - Screenshots: screenshots.md

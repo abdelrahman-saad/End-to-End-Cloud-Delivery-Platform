@@ -1,158 +1,270 @@
-# DEPI DevSecOps Project - MIND Notes App
+<p align="center">
+  <img src="docs/assets/depi-banner.svg" alt="DEPI DevSecOps Project Banner" width="100%" />
+</p>
 
-## Overview
+<h1 align="center">DEPI DevSecOps Project — MIND Notes App</h1>
 
-This project demonstrates a complete DevSecOps pipeline on AWS using:
+<p align="center">
+  <strong>GitHub → Jenkins → Docker → Trivy → DockerHub → ArgoCD → K3s Kubernetes</strong>
+</p>
 
-- GitHub
-- Jenkins
-- Docker
-- DockerHub
-- Trivy
-- K3s Kubernetes
-- ArgoCD GitOps
+<p align="center">
+  <img src="https://img.shields.io/badge/AWS-EC2-orange?logo=amazonaws&logoColor=white" />
+  <img src="https://img.shields.io/badge/CI-Jenkins-D24939?logo=jenkins&logoColor=white" />
+  <img src="https://img.shields.io/badge/Container-Docker-2496ED?logo=docker&logoColor=white" />
+  <img src="https://img.shields.io/badge/Security-Trivy-1904DA?logo=aqua&logoColor=white" />
+  <img src="https://img.shields.io/badge/Kubernetes-K3s-326CE5?logo=kubernetes&logoColor=white" />
+  <img src="https://img.shields.io/badge/GitOps-ArgoCD-EF7B4D?logo=argo&logoColor=white" />
+</p>
 
-## Application
+---
 
-MIND Notes App:
+## 🚀 Project Overview
 
-- Frontend: React / Nginx
-- Backend: Go API
-- Database: PostgreSQL
+This project demonstrates a complete **DevSecOps delivery pipeline** for the **MIND Notes App** using AWS EC2, Jenkins, Docker, Trivy, DockerHub, K3s Kubernetes, and ArgoCD GitOps.
 
-## Architecture
+The application consists of:
 
-GitHub -> Jenkins -> Docker Build -> Trivy Scan -> DockerHub -> ArgoCD -> K3s Kubernetes -> MIND App
+| Layer | Technology |
+|---|---|
+| Frontend | React + Nginx |
+| Backend | Go API |
+| Database | PostgreSQL |
+| CI | Jenkins |
+| Image Registry | DockerHub |
+| Security Scan | Trivy |
+| Kubernetes | K3s on AWS EC2 |
+| GitOps CD | ArgoCD |
+| Dynamic DNS | DuckDNS |
 
-## AWS Servers
+---
 
-Jenkins server:
+## 🔗 Live URLs
 
-- Name: depi-jenkins-server
-- Public IP: 18.201.218.207
-- Jenkins URL: http://depi-jenkins-depi.duckdns.org:8080
-
-K3s server:
-
-- Name: depi-k3s-server
-- Public IP: 52.19.23.63
-- Private IP: 172.31.46.156
-- Kubernetes: K3s v1.35.4+k3s1
-
-## GitHub Repository
-
-https://github.com/fadyy2k/depi-mind-app-v2
-
-Important files:
-
-- Jenkinsfile
-- k8s/mind-app.yaml
-- DEPI_PROJECT_FINAL_SUMMARY.md
-
-## DockerHub Images
-
-- fadyy2k/mind-backend
-- fadyy2k/mind-frontend
-
-Tags created by Jenkins:
-
-- 1
-- 2
-- 3
-- latest
-
-## Jenkins Pipeline
-
-Job name:
-
-- depi-mind-app-ci
-
-Pipeline stages:
-
-1. Checkout
-2. Show Workspace
-3. Build Backend Image
-4. Build Frontend Image
-5. Trivy Image Scan
-6. DockerHub Login
-7. Push Images
-
-## Trivy Scan Results
-
-Build #3 results:
-
-- Backend: 15 HIGH/CRITICAL findings
-- Frontend: 1 HIGH finding
-
-Trivy is configured in report-only mode for the demo.
-
-## Kubernetes Deployment
-
-Namespace:
-
-- mind
-
-Main resources:
-
-- postgres
-- mind-backend
-- mind-frontend
-- postgres-pvc
-- backend-service
-- mind-frontend-service
-
-Application URL:
-
-- http://depi-k3s-depi.duckdns.org:30080
-
-API health URL:
-
-- http://depi-k3s-depi.duckdns.org:30080/api/health
+| Service | URL |
+|---|---|
+| Jenkins | http://depi-jenkins-depi.duckdns.org:8080 |
+| MIND App | http://depi-k3s-depi.duckdns.org:30080 |
+| API Health | http://depi-k3s-depi.duckdns.org:30080/api/health |
+| ArgoCD | http://depi-k3s-depi.duckdns.org:32000 |
 
 Demo login:
 
-- Email: demo@example.com
-- Password: demo123456
+| Email | Password |
+|---|---|
+| demo@example.com | demo123456 |
 
-## ArgoCD GitOps
+---
 
-ArgoCD URL:
+## 🧭 Architecture
 
-- http://depi-k3s-depi.duckdns.org:32000
+```mermaid
+flowchart LR
+    A[GitHub Repository] --> B[Jenkins CI]
+    B --> C[Docker Build]
+    C --> D[Trivy Image Scan]
+    D --> E[DockerHub Registry]
+    E --> F[ArgoCD GitOps]
+    F --> G[K3s Kubernetes Cluster]
+    G --> H[MIND Frontend]
+    G --> I[Go Backend API]
+    I --> J[(PostgreSQL PVC)]
+```
+
+---
+
+## 🔁 CI/CD Pipeline
+
+```mermaid
+sequenceDiagram
+    participant Dev as Developer
+    participant GH as GitHub
+    participant JK as Jenkins
+    participant TR as Trivy
+    participant DH as DockerHub
+    participant AR as ArgoCD
+    participant K3S as K3s Cluster
+
+    Dev->>GH: Push code / manifests
+    JK->>GH: Checkout repository
+    JK->>JK: Build backend and frontend images
+    JK->>TR: Scan images for HIGH/CRITICAL issues
+    JK->>DH: Push versioned and latest tags
+    AR->>GH: Watch k8s manifests
+    AR->>K3S: Sync desired state
+    K3S->>K3S: Run frontend, backend, PostgreSQL
+```
+
+---
+
+## 🧱 AWS Infrastructure
+
+| Server | Purpose | Public Access |
+|---|---|---|
+| `depi-jenkins-server` | Jenkins CI server | `depi-jenkins-depi.duckdns.org:8080` |
+| `depi-k3s-server` | K3s Kubernetes + ArgoCD + App | `depi-k3s-depi.duckdns.org` |
+
+K3s server details:
+
+| Item | Value |
+|---|---|
+| Private IP | 172.31.46.156 |
+| Instance Type | t3.medium |
+| Kubernetes | K3s v1.35.4+k3s1 |
+| OS | Ubuntu 26.04 LTS |
+
+---
+
+## 🐳 DockerHub Images
+
+| Image | Tags |
+|---|---|
+| `fadyy2k/mind-backend` | `1`, `2`, `3`, `latest` |
+| `fadyy2k/mind-frontend` | `1`, `2`, `3`, `latest` |
+
+---
+
+## 🔐 DevSecOps Scanning
+
+Trivy is integrated into Jenkins in **report-only mode**.
+
+Build #3 scan summary:
+
+| Image | HIGH/CRITICAL Findings |
+|---|---:|
+| Backend | 15 |
+| Frontend | 1 |
+
+This proves the pipeline has security visibility while keeping the demo pipeline successful.
+
+---
+
+## ☸️ Kubernetes Deployment
+
+Kubernetes manifests are stored in:
+
+```text
+k8s/mind-app.yaml
+```
+
+Deployed resources:
+
+| Resource | Name |
+|---|---|
+| Namespace | `mind` |
+| Secret | `postgres-secret` |
+| PVC | `postgres-pvc` |
+| Deployment | `postgres` |
+| Deployment | `mind-backend` |
+| Deployment | `mind-frontend` |
+| Service | `postgres` |
+| Service | `backend-service` |
+| Service | `mind-frontend-service` |
+
+Frontend exposure:
+
+| Type | NodePort |
+|---|---:|
+| NodePort | 30080 |
+
+---
+
+## 🔄 ArgoCD GitOps
 
 ArgoCD application:
 
-- mind-app
+| Field | Value |
+|---|---|
+| App Name | `mind-app` |
+| Repo | `https://github.com/fadyy2k/depi-mind-app-v2.git` |
+| Path | `k8s` |
+| Branch | `main` |
+| Namespace | `mind` |
+| Sync | Automated |
+| Prune | Enabled |
+| Self-Heal | Enabled |
 
-Source:
+Final status:
 
-- Repo: https://github.com/fadyy2k/depi-mind-app-v2.git
-- Path: k8s
-- Branch: main
+| Sync Status | Health Status |
+|---|---|
+| Synced | Healthy |
 
-Final ArgoCD status:
+---
 
-- Synced
-- Healthy
+## 🧪 Self-Healing Test
 
-## Self-Healing Test
+Manual drift was created by scaling the frontend deployment to zero:
 
-The frontend deployment was manually scaled to zero replicas.
+```bash
+kubectl scale deployment mind-frontend -n mind --replicas=0
+```
 
-ArgoCD detected the drift and restored it back to the Git desired state.
+ArgoCD detected the drift and restored the deployment back to the desired state from Git.
+
+Final proof:
+
+```text
+mind-frontend: 1/1 Running
+mind-app: Synced / Healthy
+```
+
+---
+
+## ✅ Final Validation
+
+```bash
+kubectl get nodes -o wide
+kubectl get pods -n mind -o wide
+kubectl get svc -n mind
+kubectl get application mind-app -n argocd
+curl -i http://localhost:30080/api/health
+```
 
 Final result:
 
-- mind-frontend: 1/1 Running
-- mind-app: Synced / Healthy
+| Check | Status |
+|---|---|
+| K3s node | Ready |
+| Backend pod | Running |
+| Frontend pod | Running |
+| PostgreSQL pod | Running |
+| ArgoCD app | Synced / Healthy |
+| API health | 200 OK |
 
-## Final Validation
+---
 
-Final confirmed status:
+## 📚 Full Documentation Site
 
-- K3s node: Ready
-- Backend pod: Running
-- Frontend pod: Running
-- PostgreSQL pod: Running
-- ArgoCD app: Synced / Healthy
-- API health: 200 OK
+A full MkDocs Material documentation site is included under the `docs/` directory.
+
+Run locally:
+
+```bash
+pip install mkdocs-material
+mkdocs serve
+```
+
+Then open:
+
+```text
+http://127.0.0.1:8000
+```
+
+---
+
+## 🏁 Project Outcome
+
+This project successfully demonstrates:
+
+- GitHub source code management
+- Jenkins CI automation
+- Docker image build and tagging
+- DockerHub image publishing
+- Trivy vulnerability scanning
+- Kubernetes deployment using K3s
+- Persistent PostgreSQL storage with PVC
+- Public application access through NodePort
+- ArgoCD GitOps deployment
+- Automated sync, prune, and self-healing
+- DuckDNS dynamic DNS for stable demo URLs
