@@ -26,6 +26,28 @@ pipeline {
             }
         }
 
+        stage('Gitleaks Secret Scan') {
+            steps {
+                sh '''
+                    mkdir -p gitleaks-reports
+
+                    echo "========== Gitleaks Secret Scan =========="
+                    docker run --rm \
+                      -v "$PWD:/repo" \
+                      ghcr.io/gitleaks/gitleaks:latest detect \
+                      --source /repo \
+                      --no-git \
+                      --report-format json \
+                      --report-path /repo/gitleaks-reports/gitleaks-report.json \
+                      --redact \
+                      --verbose || true
+
+                    echo "========== Gitleaks Report =========="
+                    cat gitleaks-reports/gitleaks-report.json || true
+                '''
+            }
+        }
+
         stage('Build Backend Image') {
             steps {
                 sh '''
