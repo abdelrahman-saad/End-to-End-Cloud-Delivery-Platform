@@ -1,0 +1,127 @@
+body {
+  margin: 0;
+  padding: 0;
+  background: #0B101B;
+  font-family: Inter, Poppins, Lato, sans-serif;
+}
+
+#root {
+  min-height: 100vh;
+}
+
+/* Login page styles */
+.glass-bg {
+  background: rgba(22, 23, 30, 0.96);
+  backdrop-filter: blur(6px) saturate(120%);
+}
+
+.shadow-xlarge {
+  box-shadow: 0 18px 80px 0 #000000a0;
+}
+
+.input-glass {
+  background: rgba(28, 31, 37, 0.97);
+}
+
+.input-glass:focus {
+  background: rgba(35, 41, 54, 0.99);
+}
+
+.login-btn, .google-btn {
+  transition: box-shadow 0.16s, background 0.13s;
+}
+
+.login-btn:hover, .google-btn:hover {
+  background: #282c38;
+  box-shadow: 0 7px 32px #22243b33;
+}
+
+.tab-btn.active {
+  background: #181B20;
+  color: #f8f8f8;
+}
+
+.tab-btn.inactive {
+  background: transparent;
+  color: #888;
+}
+
+.anim-fadein {
+  animation: fadein 0.9s cubic-bezier(0.42, 0, 0.58, 1);
+}
+
+@keyframes fadein {
+  from {
+    opacity: 0;
+    transform: translateY(7px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* Notes page styles */
+::placeholder {
+  color: #888e99;
+  opacity: 1;
+}
+
+.note-card {
+  transition: transform 0.08s;
+}
+
+.note-card:hover {
+  transform: translateY(-2px) scale(1.03);
+  box-shadow: 0 8px 40px 0 #00000044;
+}
+
+.sidebar-glass {
+  backdrop-filter: blur(17px) saturate(120%);
+  -webkit-backdrop-filter: blur(17px) saturate(120%);
+  background-color: rgba(36, 39, 45, 0.95);
+}
+
+.sidebar-icon {
+  transition: background 0.14s, color 0.14s, box-shadow 0.14s;
+}
+
+.sidebar-icon.active {
+  background: #23262f;
+  color: #fff;
+}
+
+.sidebar-icon.inactive {
+  color: #9297A5;
+}
+
+.sidebar-bottom-btn {
+  box-shadow: 0 2px 12px 0 #23262f44;
+  transition: background 0.13s;
+}
+
+.sidebar-bottom-btn:hover {
+  background: #1a1d23;
+}
+
+.sidebar-separator {
+  width: 40%;
+  height: 1.5px;
+  background: #383C4360;
+  margin: 0.8rem auto;
+  border-radius: 10px;
+}
+
+.sidebar-vertical-label {
+  writing-mode: vertical-rl;
+  letter-spacing: 3.5px;
+  font-size: 11px;
+  color: #9297A5;
+}
+
+@media (max-width: 1024px) {
+  .rounded-illustration {
+    border-radius: 2rem;
+  }
+}
+

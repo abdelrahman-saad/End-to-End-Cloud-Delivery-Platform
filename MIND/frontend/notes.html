@@ -1,0 +1,384 @@
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Notes App - Modern Sidebar</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        theme: {
+          extend: {
+            colors: {
+              richblack: "#090B10",
+              customyellow: "#FED766",
+              customred: "#F76C5E",
+              customgreen: "#5DD39E",
+              customblue: "#3B9AE1",
+              custompurple: "#845EC2",
+              customgray: "#23262F",
+              sidebar: "#181B20",
+              sidebarHighlight: "#24272D",
+              sidebarLight: "#ededed",
+              sidebarBorder: "#383C43",
+              sidebarInactive: "#9297A5"
+            },
+            fontFamily: {
+              sans: ['Inter', 'sans-serif'],
+            },
+          },
+        },
+      };
+    </script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@500;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"/>
+    <script src="https://unpkg.com/react@18.0.0/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@18.0.0/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.js"></script>
+    <style>
+      body {
+        background: #090B10;
+      }
+      ::placeholder {
+        color: #888e99;
+        opacity: 1;
+      }
+      .note-card {
+        transition: transform .08s;
+      }
+      .note-card:hover {
+        transform: translateY(-2px) scale(1.03);
+        box-shadow: 0 8px 40px 0 #00000044;
+      }
+      .sidebar-glass {
+        backdrop-filter: blur(17px) saturate(120%);
+        -webkit-backdrop-filter: blur(17px) saturate(120%);
+        background-color: rgba(36, 39, 45, 0.95);
+      }
+      .sidebar-icon {
+        transition: background 0.14s, color 0.14s, box-shadow 0.14s;
+      }
+      .sidebar-icon.active {
+        background: #23262f;
+        color: #fff;
+      }
+      .sidebar-icon.inactive {
+        color: #9297A5;
+      }
+      .sidebar-bottom-btn {
+        box-shadow: 0 2px 12px 0 #23262f44;
+        transition: background 0.13s;
+      }
+      .sidebar-bottom-btn:hover {
+        background: #1a1d23;
+      }
+      .sidebar-separator {
+        width: 40%;
+        height: 1.5px;
+        background: #383C4360;
+        margin: 0.8rem auto;
+        border-radius: 10px;
+      }
+      .sidebar-vertical-label {
+        writing-mode: vertical-rl;
+        letter-spacing: 3.5px;
+        font-size: 11px;
+        color: #9297A5;
+      }
+    </style>
+  </head>
+  <body class="bg-richblack text-white min-h-screen font-sans">
+    <div id="root"></div>
+    <script type="text/babel">
+
+const notesData = [
+  {
+    title: "The beginning of screenless design: UI jobs to be taken over by Solution Architect",
+    date: "May 21, 2020",
+    status: "note",
+    color: "customyellow",
+    starred: false
+  },
+  {
+    title: "13 Things You Should Give Up If You Want To Be a Successful UX Designer",
+    date: "May 25, 2020",
+    status: "todo:done",
+    color: "customred",
+    starred: true
+  },
+  {
+    title: "The Psychology Principles Every UI/UX Designer Needs to Know",
+    date: "June 5, 2020",
+    status: "todo:inprogress",
+    color: "customgreen",
+    starred: false
+  },
+  {
+    title: "10 UI & UX Lessons from Designing My Own Product",
+    date: "May 22, 2020",
+    status: "todo:done",
+    color: "custompurple",
+    starred: true
+  },
+  {
+    title: "52 Research Terms you need to know as a UX Designer",
+    date: "May 30, 2020",
+    status: "todo:nostatus",
+    color: "customgreen",
+    starred: false
+  },
+  {
+    title: "Text fields & Forms in web design – UI components series",
+    date: "May 27, 2020",
+    status: "note",
+    color: "customblue",
+    starred: false
+  },
+  {
+    title: "Design for Cognitive Biases: A Practical Guide",
+    date: "June 9, 2020",
+    status: "todo:done",
+    color: "customyellow",
+    starred: true
+  },
+  {
+    title: "Why Prototyping Is the Key to Product Innovation",
+    date: "June 12, 2020",
+    status: "todo:inprogress",
+    color: "customred",
+    starred: false
+  },
+  {
+    title: "Accessible Color Palettes for UI Designers",
+    date: "June 18, 2020",
+    status: "todo:inprogress",
+    color: "customblue",
+    starred: false
+  },
+  {
+    title: "The Power of Microinteractions in UI Design",
+    date: "July 1, 2020",
+    status: "todo:nostatus",
+    color: "custompurple",
+    starred: true
+  },
+  {
+    title: "Mobile UX Trends for 2021",
+    date: "June 22, 2020",
+    status: "todo:done",
+    color: "customgreen",
+    starred: false
+  },
+  {
+    title: "Typography Tricks: Readability & Hierarchy in UI",
+    date: "July 5, 2020",
+    status: "note",
+    color: "customyellow",
+    starred: false
+  }
+];
+
+const statusMap = {
+  "note": {
+    text: "Note",
+    icon: <i className="far fa-sticky-note" />,
+    bg: "bg-gray-800",
+    color: "text-gray-300"
+  },
+  "todo:done": {
+    text: "Done",
+    icon: <i className="fas fa-check-circle" />,
+    bg: "bg-green-700",
+    color: "text-green-300"
+  },
+  "todo:inprogress": {
+    text: "In Progress",
+    icon: <i className="fas fa-spinner fa-spin" />,
+    bg: "bg-yellow-700",
+    color: "text-yellow-200"
+  },
+  "todo:nostatus": {
+    text: "No Status",
+    icon: <i className="far fa-circle" />,
+    bg: "bg-gray-700",
+    color: "text-gray-400"
+  }
+}
+
+function SideMiniMenu() {
+  // Selected state for highlight effect
+  const [active, setActive] = React.useState(0);
+
+  // Icon list: mimic ref image, but relate to this app context!
+  const icons = [
+    // Add
+    { icon: <i className="fas fa-plus" />, label: "Add" },
+    // Home/All notes
+    { icon: <i className="fas fa-home" />, label: "Home" },
+    // Starred/favorites
+    { icon: <i className="fas fa-star" />, label: "Starred" },
+    // Share/Collab
+    { icon: <i className="fas fa-share-alt" />, label: "Share" },
+    // List/To-do
+    { icon: <i className="fas fa-tasks" />, label: "To-Do" },
+    // Box/Archive
+    { icon: <i className="fas fa-archive" />, label: "Archive" }
+  ];
+
+  return (
+    <aside className="flex flex-col h-screen py-2 px-0 select-none z-30">
+      {/* Main menu (rounded, glassy background) */}
+      <div className="sidebar-glass flex flex-col items-center pt-3 pb-4 px-0 w-16 rounded-3xl shadow-xl mx-1 my-2 relative" style={{minHeight:'510px'}}>
+        {/* Top: Add (Plus/Cross) */}
+        <button
+          className={`sidebar-icon flex items-center justify-center w-11 h-11 rounded-xl mb-2 text-xl ${active === 0 ? "active" : "inactive"}`}
+          style={{ marginTop: '2px'}}
+          aria-label="Add"
+          tabIndex={0}
+          onClick={()=>setActive(0)}
+        >
+          <i className="fas fa-plus" />
+        </button>
+        {/* Separator */}
+        <div className="sidebar-separator mt-1 mb-2"></div>
+        {/* Other icons */}
+        {icons.slice(1,5).map((item, idx) => (
+          <button
+            key={idx+1}
+            className={`sidebar-icon flex items-center justify-center w-11 h-11 my-1 rounded-xl text-xl hover:bg-sidebarHighlight transition
+              ${active === idx+1 ? "active" : "inactive"}`}
+            aria-label={item.label}
+            tabIndex={0}
+            onClick={()=>setActive(idx+1)}
+          >
+            {item.icon}
+          </button>
+        ))}
+        {/* Extra icons (archive) and separator above settings */}
+        <button
+          className={`sidebar-icon flex items-center justify-center w-11 h-11 mt-2 mb-0 rounded-xl text-xl hover:bg-sidebarHighlight transition
+            ${active === 5 ? "active" : "inactive"}`}
+          aria-label={icons[5].label}
+          tabIndex={0}
+          onClick={()=>setActive(5)}
+        >
+          {icons[5].icon}
+        </button>
+        <div className="sidebar-separator mt-5 mb-0"></div>
+        {/* Vertical label (for demo: "REAGLE 2025 | NAV") */}
+        <div
+          className="mt-2 mb-1 mx-auto sidebar-vertical-label text-xs font-medium tracking-wider text-sidebarInactive"
+          style={{letterSpacing:'2px',lineHeight:'90%'}}
+        >
+          NOTES NAV
+        </div>
+      </div>
+      {/* Bottom button (Settings) */}
+      <div className="flex-1 flex flex-col justify-end pb-4 pt-3">
+        <button
+          className="sidebar-bottom-btn flex items-center justify-center w-16 h-14 ml-1 bg-sidebar rounded-3xl shadow-lg hover:bg-sidebarHighlight transition text-xl"
+          aria-label="Settings"
+          tabIndex={0}
+        >
+          <i className="fas fa-cog"></i>
+        </button>
+        {/* Vertical label settings */}
+        <div
+          className="mt-1 mx-auto sidebar-vertical-label text-xs font-medium tracking-wider text-sidebarInactive"
+          style={{letterSpacing:'1.3px',lineHeight:'80%'}}
+        >
+          SETTINGS
+        </div>
+      </div>
+    </aside>
+  );
+}
+
+function StatusBadge({ status }) {
+  const data = statusMap[status];
+  return (
+    <span className={`absolute right-3 bottom-3 flex items-center space-x-2 px-2 py-1 rounded bg-opacity-70 ${data.bg} ${data.color} text-xs font-semibold`}>
+      <span>{data.icon}</span>
+      <span>{data.text}</span>
+    </span>
+  );
+}
+
+function Star({ active }) {
+  return (
+    <span className="absolute right-3 top-3">
+      <i className={`fa-star ${active ? "fas text-yellow-400" : "far text-gray-300"} text-lg`} />
+    </span>
+  );
+}
+
+function NoteCard({ title, date, status, color, starred }) {
+  const cardColors = {
+    "customyellow": "bg-customyellow text-richblack",
+    "customred": "bg-customred text-white",
+    "customgreen": "bg-customgreen text-richblack",
+    "customblue": "bg-customblue text-white",
+    "custompurple": "bg-custompurple text-white",
+  };
+  return (
+    <div className={`relative rounded-xl note-card shadow-lg px-6 py-6 min-h-[158px] ${cardColors[color]} transition`}>
+      <div className="font-semibold text-lg leading-tight mb-6 max-h-28 line-clamp-4">{title}</div>
+      <div className="absolute left-6 bottom-3 text-[14px] text-opacity-70 font-medium">{date}</div>
+      <StatusBadge status={status} />
+      <Star active={starred} />
+    </div>
+  );
+}
+
+function NotesGrid({ notes }) {
+  return (
+    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8 mt-8">
+      {notes.map((note, idx) => (
+        <NoteCard key={idx} {...note} />
+      ))}
+    </div>
+  );
+}
+
+function NotesHeader({ search, setSearch }) {
+  return (
+    <div className="flex flex-col sm:flex-row items-center justify-between mb-8">
+      <h1 className="text-4xl md:text-5xl font-bold tracking-tight text-white">Notes</h1>
+      <div className="flex mt-4 sm:mt-0">
+        <div className="relative w-72">
+          <span className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 text-lg"><i className="fas fa-search"></i></span>
+          <input 
+            type="text" 
+            value={search}
+            onChange={e=>setSearch(e.target.value)}
+            placeholder="Search" 
+            className="w-full bg-gray-800 text-white rounded-lg pl-10 pr-4 py-2 outline-none border-none placeholder:text-gray-400 focus:ring-2 focus:ring-customblue transition font-medium"
+            style={{fontSize: "1.05rem"}}
+          />
+        </div>
+      </div>
+    </div>
+  );
+}
+
+function App() {
+  const [search, setSearch] = React.useState("");
+  const filteredNotes = notesData.filter(n =>
+    n.title.toLowerCase().includes(search.toLowerCase())
+  );
+  return (
+    <div className="flex min-h-screen">
+      <SideMiniMenu/>
+      <main className="flex-1 px-5 md:px-14 py-10 bg-richblack min-h-screen">
+        <NotesHeader search={search} setSearch={setSearch} />
+        <NotesGrid notes={filteredNotes}/>
+      </main>
+    </div>
+  )
+}
+
+ReactDOM.createRoot(document.getElementById("root")).render(<App />);
+    </script>
+  </body>
+</html>

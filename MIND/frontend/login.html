@@ -1,0 +1,193 @@
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Login | Notes App</title>
+    <meta name="description" content="Sign in to Notes App with email or Google. Minimal, modern, full-width, dark mode login/sign-up page with immersive illustration." />
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"/>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@500;700&display=swap" rel="stylesheet">
+    <style>
+      body { background: #0B101B; font-family: Inter, Poppins, Lato, sans-serif; }
+      .glass-bg { background: rgba(22,23,30,0.96); backdrop-filter: blur(6px) saturate(120%); }
+      .shadow-xlarge { box-shadow: 0 18px 80px 0 #000000a0; }
+      .input-glass { background: rgba(28,31,37,0.97);}
+      .input-glass:focus { background: rgba(35,41,54,0.99);}
+      .login-btn { transition: box-shadow .16s,background .13s;}
+      .login-btn:hover, .google-btn:hover { background: #282c38; box-shadow: 0 7px 32px #22243b33;}
+      .google-btn { transition: box-shadow .16s,background .13s;}
+      .tab-btn.active { background: #181B20; color: #f8f8f8;}
+      .tab-btn.inactive { background: transparent; color: #888;}
+      .anim-fadein { animation: fadein .9s cubic-bezier(.42,0,.58,1);}
+      @keyframes fadein { from { opacity: 0; transform: translateY(7px); } to { opacity: 1; transform: none; } }
+      @media (max-width: 1024px) {
+        .rounded-illustration {
+          border-radius: 2rem;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main class="flex min-h-screen w-full items-center justify-center bg-[#0B101B] px-2 py-8">
+      <section id="section-login" class="w-full max-w-6xl mx-auto flex flex-row gap-0 shadow-xlarge overflow-hidden anim-fadein" style="min-height:700px;">
+        <!-- Left: Card Form Layer -->
+        <div class="flex flex-col justify-center z-10 w-full lg:w-1/3 min-w-[300px] glass-bg px-8 sm:px-14 py-10 rounded-l-2xl" style="box-shadow: 0 4px 28px #000a;">
+          <!-- Tabs -->
+          <div class="flex items-center space-x-3 mb-6">
+            <button id="tab-login" class="tab-btn active px-4 py-1.5 text-base font-semibold rounded-xl outline-none focus:ring-2 focus:ring-[#3B9AE1]" type="button" aria-selected="true" onclick="showTab('login')">
+              Login
+            </button>
+            <button id="tab-signup" class="tab-btn inactive px-4 py-1.5 text-base font-semibold rounded-xl outline-none focus:ring-2 focus:ring-[#3B9AE1]" type="button" aria-selected="false" onclick="showTab('signup')">
+              Sign Up
+            </button>
+          </div>
+          <!-- Welcome Headline -->
+          <h1 class="text-3xl sm:text-4xl font-bold mb-2 text-white">Welcome!</h1>
+          <p class="text-base text-gray-400 mb-8">Access your notes. Sign in with your email or Google account.</p>
+          <!-- Form group -->
+          <form id="login-form" class="space-y-6" autocomplete="off">
+            <div>
+              <label for="email" class="block text-sm font-medium text-gray-300 mb-1">Email</label>
+              <input id="email" name="email" type="email" required autocomplete="username" placeholder="you@example.com"
+                class="input-glass w-full rounded-lg px-4 py-3 bg-opacity-90 text-white border border-[#282C38] focus:ring-2 focus:ring-[#3B9AE1] outline-none font-medium transition"
+                aria-label="Email" />
+              <div id="email-error" class="text-xs text-red-500 mt-1 hidden">Please enter a valid email address.</div>
+            </div>
+            <div id="password-field">
+              <label for="password" class="block text-sm font-medium text-gray-300 mb-1">Password</label>
+              <input id="password" name="password" type="password" required autocomplete="current-password" placeholder="Your password"
+                class="input-glass w-full rounded-lg px-4 py-3 bg-opacity-90 text-white border border-[#282C38] focus:ring-2 focus:ring-[#3B9AE1] outline-none font-medium transition"
+                aria-label="Password" />
+              <div id="password-error" class="text-xs text-red-500 mt-1 hidden">Password must be at least 6 characters.</div>
+            </div>
+            <button type="submit"
+              class="login-btn w-full py-3 rounded-lg bg-[#3B9AE1] text-white font-bold text-lg shadow-md hover:bg-[#0258A6] focus:ring-2 focus:ring-[#3B9AE1] transition"
+              aria-label="Login">Login</button>
+          </form>
+          <form id="signup-form" class="space-y-6 hidden" autocomplete="off">
+            <div>
+              <label for="signup-email" class="block text-sm font-medium text-gray-300 mb-1">Email</label>
+              <input id="signup-email" name="signup-email" type="email" required autocomplete="username" placeholder="you@example.com"
+                class="input-glass w-full rounded-lg px-4 py-3 bg-opacity-90 text-white border border-[#282C38] focus:ring-2 focus:ring-[#3B9AE1] outline-none font-medium transition"
+                aria-label="Email" />
+              <div id="signup-email-error" class="text-xs text-red-500 mt-1 hidden">Please enter a valid email address.</div>
+            </div>
+            <div>
+              <label for="signup-password" class="block text-sm font-medium text-gray-300 mb-1">Password</label>
+              <input id="signup-password" name="signup-password" type="password" required autocomplete="new-password" placeholder="Create a password"
+                class="input-glass w-full rounded-lg px-4 py-3 bg-opacity-90 text-white border border-[#282C38] focus:ring-2 focus:ring-[#3B9AE1] outline-none font-medium transition"
+                aria-label="Password" />
+              <div id="signup-password-error" class="text-xs text-red-500 mt-1 hidden">Password must be at least 6 characters.</div>
+            </div>
+            <button type="submit"
+              class="login-btn w-full py-3 rounded-lg bg-[#5DD39E] text-richblack font-bold text-lg shadow-md hover:bg-[#08855D] focus:ring-2 focus:ring-[#5DD39E] transition"
+              aria-label="Sign Up">Sign Up</button>
+          </form>
+          <!-- Divider -->
+          <div class="flex items-center my-6">
+            <span class="flex-grow border-t border-[#282C38]"></span>
+            <span class="mx-4 text-gray-500 text-sm">or</span>
+            <span class="flex-grow border-t border-[#282C38]"></span>
+          </div>
+          <!-- Google button -->
+          <button type="button"
+            class="google-btn w-full flex items-center justify-center gap-3 py-3 rounded-lg bg-gray-900 text-white font-semibold text-base shadow-md border border-[#282C38] hover:bg-gray-800 focus:ring-2 focus:ring-[#3B9AE1] transition"
+            aria-label="Sign in with Google" onclick="handleGoogleSignIn()">
+            <span class="w-6 h-6 flex items-center justify-center text-lg"><i class="fab fa-google"></i></span>
+            Continue with Google
+          </button>
+          <!-- Footer links -->
+          <div class="flex items-center justify-between mt-8 text-[#656A77] text-xs font-medium">
+            <div class="flex gap-4">
+              <a href="#" class="hover:text-white transition focus:text-white">Privacy</a>
+              <a href="#" class="hover:text-white transition focus:text-white">Terms</a>
+            </div>
+            <div class="text-gray-500 tracking-wide font-semibold text-xs">notes.app</div>
+            <div class="flex gap-3">
+              <a href="#" class="hover:text-white transition focus:text-white">Support</a>
+            </div>
+          </div>
+        </div>
+        <!-- Right: Illustration -->
+        <div class="relative flex w-0 min-h-[500px] lg:w-2/3 overflow-hidden bg-[#16181E]">
+          <img
+            src="https://images.pexels.com/photos/373912/pexels-photo-373912.jpeg?auto=compress&w=1200&q=80"
+            alt="Minimal futuristic workspace illustration"
+            class="rounded-illustration object-cover w-full h-full lg:rounded-r-3xl lg:rounded-l-none shadow-2xl transition scale-[1.01]"
+            style="border-radius: 0 2.25rem 2.25rem 0; box-shadow: 0 10px 48px #1A2234d9;"
+          />
+          <!-- Overlay for slight effect -->
+          <div class="absolute inset-0 bg-gradient-to-br from-[#181B20] to-[#1D2230] opacity-35 pointer-events-none"></div>
+        </div>
+      </section>
+    </main>
+    <script>
+      // Tabs toggle
+      function showTab(tab) {
+        const loginBtn = document.getElementById('tab-login');
+        const signupBtn = document.getElementById('tab-signup');
+        const loginForm = document.getElementById('login-form');
+        const signupForm = document.getElementById('signup-form');
+        if (tab === 'login') {
+          loginBtn.classList.add('active');
+          loginBtn.classList.remove('inactive');
+          signupBtn.classList.remove('active');
+          signupBtn.classList.add('inactive');
+          loginForm.classList.remove('hidden');
+          signupForm.classList.add('hidden');
+        } else {
+          signupBtn.classList.add('active');
+          signupBtn.classList.remove('inactive');
+          loginBtn.classList.remove('active');
+          loginBtn.classList.add('inactive');
+          signupForm.classList.remove('hidden');
+          loginForm.classList.add('hidden');
+        }
+      }
+
+      // Form validation
+      document.getElementById('login-form').onsubmit = function(e) {
+        const email = document.getElementById('email');
+        const password = document.getElementById('password');
+        const emailErr = document.getElementById('email-error');
+        const passErr = document.getElementById('password-error');
+        let valid = true;
+        emailErr.classList.add('hidden');
+        passErr.classList.add('hidden');
+        // Simple email
+        if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.value.trim())) {
+          emailErr.classList.remove('hidden');
+          valid = false;
+        }
+        if ((password.value.trim().length < 6)) {
+          passErr.classList.remove('hidden');
+          valid = false;
+        }
+        if (!valid) {e.preventDefault(); return false;}
+      };
+      document.getElementById('signup-form').onsubmit = function(e) {
+        const email = document.getElementById('signup-email');
+        const password = document.getElementById('signup-password');
+        const emailErr = document.getElementById('signup-email-error');
+        const passErr = document.getElementById('signup-password-error');
+        let valid = true;
+        emailErr.classList.add('hidden');
+        passErr.classList.add('hidden');
+        // Simple email
+        if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email.value.trim())) {
+          emailErr.classList.remove('hidden');
+          valid = false;
+        }
+        if ((password.value.trim().length < 6)) {
+          passErr.classList.remove('hidden');
+          valid = false;
+        }
+        if (!valid) {e.preventDefault(); return false;}
+      };
+      // Google button (demo only)
+      function handleGoogleSignIn() {
+        alert("Google Sign-In is not implemented in demo.");
+      }
+    </script>
+  </body>
+</html>
