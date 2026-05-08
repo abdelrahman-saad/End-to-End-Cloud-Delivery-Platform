@@ -50,16 +50,16 @@ const liveLinks = [
 ];
 
 const pipelineStages = [
-  ["Checkout", "GitBranch â€” Pull source code from repository"],
-  ["Show Workspace", "Jenkins â€” Validate workspace and folder structure"],
-  ["Gitleaks Secret Scan", "Gitleaks â€” Detect leaked secrets before build"],
-  ["SonarQube Code Scan", "SonarQube â€” Analyze code quality and maintainability"],
-  ["Build Backend Image", "Docker â€” Build Go backend image"],
-  ["Build Frontend Image", "Docker â€” Build React/Nginx frontend image"],
-  ["Trivy Image Scan", "Trivy â€” Scan Docker images for vulnerabilities"],
-  ["DockerHub Login", "DockerHub â€” Authenticate using Jenkins credentials"],
-  ["Push Images", "DockerHub â€” Push versioned and latest image tags"],
-  ["Docker Logout", "Jenkins â€” Clean registry session"]
+  ["Checkout", "GitBranch — Pull source code from repository"],
+  ["Show Workspace", "Jenkins — Validate workspace and folder structure"],
+  ["Gitleaks Secret Scan", "Gitleaks — Detect leaked secrets before build"],
+  ["SonarQube Code Scan", "SonarQube — Analyze code quality and maintainability"],
+  ["Build Backend Image", "Docker — Build Go backend image"],
+  ["Build Frontend Image", "Docker — Build React/Nginx frontend image"],
+  ["Trivy Image Scan", "Trivy — Scan Docker images for vulnerabilities"],
+  ["DockerHub Login", "DockerHub — Authenticate using Jenkins credentials"],
+  ["Push Images", "DockerHub — Push versioned and latest image tags"],
+  ["Docker Logout", "Jenkins — Clean registry session"]
 ];
 
 const buildTrend = [
@@ -155,8 +155,8 @@ function Hero() {
   return (
     <section className="hero">
       <div>
-        <p className="eyebrow">AWS â€¢ Jenkins â€¢ Kubernetes â€¢ GitOps â€¢ DevSecOps</p>
-        <h1>DEPI DevSecOps Project â€” MIND Notes App</h1>
+        <p className="eyebrow">AWS • Jenkins • Kubernetes • GitOps • DevSecOps</p>
+        <h1>DEPI DevSecOps Project — MIND Notes App</h1>
         <p className="hero-copy">
           A complete DevSecOps workflow deployed on AWS EC2 using Jenkins CI, Docker images,
           security scanning, DockerHub registry, K3s Kubernetes, and ArgoCD GitOps self-healing.
@@ -170,7 +170,7 @@ function Hero() {
 
       <div className="hero-panel">
         <h3>Final Toolchain</h3>
-        <p>GitBranch â†’ Jenkins â†’ Gitleaks â†’ SonarQube â†’ Docker Build â†’ Trivy â†’ DockerHub â†’ ArgoCD â†’ K3s Kubernetes</p>
+        <p>GitBranch → Jenkins → Gitleaks → SonarQube → Docker Build → Trivy → DockerHub → ArgoCD → K3s Kubernetes</p>
         <div className="chip-row">
           {["GitBranch", "Jenkins", "Gitleaks", "SonarQube", "Docker", "Trivy", "DockerHub", "ArgoCD", "K3s"].map((item) => (
             <span className="chip" key={item}>{item}</span>
@@ -217,17 +217,17 @@ function Overview() {
 
 function Ec2ArchitectureDiagram() {
   const leftServices = [
-    ["Jenkins", "Port 8080 â€” CI pipeline automation"],
+    ["Jenkins", "Port 8080 — CI pipeline automation"],
     ["Docker Engine", "Builds backend and frontend images"],
     ["Gitleaks", "Scans repository for leaked secrets before build"],
-    ["SonarQube", "Port 9000 â€” static code analysis and quality gate"],
+    ["SonarQube", "Port 9000 — static code analysis and quality gate"],
     ["Trivy", "Scans Docker images for vulnerabilities"],
     ["MkDocs / GitBranch Pages", "Documentation generated and published from repo"]
   ];
 
   const rightServices = [
     ["K3s Kubernetes", "Single-node Kubernetes cluster"],
-    ["ArgoCD", "Port 32000 â€” GitOps sync and self-healing"],
+    ["ArgoCD", "Port 32000 — GitOps sync and self-healing"],
     ["MIND Frontend", "React + Nginx exposed on NodePort 30080"],
     ["MIND Backend", "Go API service with /api/health endpoint"],
     ["PostgreSQL", "Database pod with PVC persistent storage"],
@@ -333,7 +333,7 @@ function ArchitectureSummary() {
       <h2><Server size={24} /> Architecture & Infrastructure Summary</h2>
       <div className="chain">
         {["GitBranch", "Jenkins", "Gitleaks", "SonarQube", "Docker Build", "Trivy", "DockerHub", "ArgoCD", "K3s", "MIND App"].map((item) => (
-          <React.Fragment key={item}><span>{item}</span><b>â†’</b></React.Fragment>
+          <React.Fragment key={item}><span>{item}</span><b>→</b></React.Fragment>
         ))}
       </div>
 
@@ -562,7 +562,7 @@ function App() {
       <Evidence />
       <Qna />
       <ProductionNote />
-      <footer>DEPI DevSecOps Project Showcase â€” MIND Notes App</footer>
+      <footer>DEPI DevSecOps Project Showcase — MIND Notes App</footer>
     </main>
   );
 }
