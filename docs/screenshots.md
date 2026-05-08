@@ -1,89 +1,227 @@
-# Screenshots Evidence
+# Screenshots & Evidence
 
-<div class="depi-hero">
-  <div class="depi-eyebrow">Visual Evidence</div>
-  <h1>Project screenshots and proof</h1>
-  <p>
-    This page collects the screenshots that prove the full workflow from GitHub to Jenkins,
-    DockerHub, K3s, ArgoCD, SonarQube, and the running application.
-  </p>
-</div>
+This page contains the complete visual evidence for every stage of the DevSecOps pipeline. Each screenshot proves a specific step was completed successfully.
 
-<div class="screenshot-grid">
+---
 
-<figure class="shot">
-  <img src="screenshots/github-repo.png" alt="GitHub Repository" />
-  <figcaption>GitHub Repository</figcaption>
-</figure>
+## GitHub Repository
 
-<figure class="shot">
-  <img src="screenshots/mkdocs-home.png" alt="MkDocs Documentation" />
-  <figcaption>MkDocs Documentation</figcaption>
-</figure>
+![GitHub Repository](screenshots/github-repo.png)
 
-<figure class="shot">
-  <img src="screenshots/jenkins-dashboard.png" alt="Jenkins Dashboard" />
-  <figcaption>Jenkins Dashboard</figcaption>
-</figure>
+**What it shows:** The public GitHub repository containing all source code, Kubernetes manifests, Jenkins pipeline, MkDocs documentation source, and showcase code.
 
-<figure class="shot">
-  <img src="screenshots/jenkins-build-8-success.png" alt="Jenkins Build 8 Success" />
-  <figcaption>Jenkins Build #8 Success</figcaption>
-</figure>
+**Evidence:** The repository structure is visible including `MIND/`, `k8s/`, `Jenkinsfile`, `docs/`, `showcase/`, and `.github/workflows/`.
 
-<figure class="shot">
-  <img src="screenshots/jenkins-gitleaks-console.png" alt="Gitleaks Console" />
-  <figcaption>Gitleaks Secret Scan</figcaption>
-</figure>
+---
 
-<figure class="shot">
-  <img src="screenshots/jenkins-sonarqube-console.png" alt="SonarQube Console" />
-  <figcaption>SonarQube Jenkins Scan</figcaption>
-</figure>
+## MkDocs Documentation
 
-<figure class="shot">
-  <img src="screenshots/sonarqube-dashboard.png" alt="SonarQube Dashboard" />
-  <figcaption>SonarQube Dashboard</figcaption>
-</figure>
+![MkDocs Documentation](screenshots/mkdocs-home.png)
 
-<figure class="shot">
-  <img src="screenshots/jenkins-trivy-console.png" alt="Trivy Console" />
-  <figcaption>Trivy Image Scan</figcaption>
-</figure>
+**What it shows:** The live MkDocs Material documentation site deployed to GitHub Pages.
 
-<figure class="shot">
-  <img src="screenshots/dockerhub-backend.png" alt="DockerHub Backend" />
-  <figcaption>DockerHub Backend Image</figcaption>
-</figure>
+**Evidence:** The full documentation portal is live at [https://fadyy2k.github.io/depi-mind-app-v2/](https://fadyy2k.github.io/depi-mind-app-v2/)
 
-<figure class="shot">
-  <img src="screenshots/dockerhub-frontend.png" alt="DockerHub Frontend" />
-  <figcaption>DockerHub Frontend Image</figcaption>
-</figure>
+---
 
-<figure class="shot">
-  <img src="screenshots/k3s-pods.png" alt="K3s Pods" />
-  <figcaption>K3s Pods and Services</figcaption>
-</figure>
+## Jenkins Dashboard
 
-<figure class="shot">
-  <img src="screenshots/mind-app.png" alt="MIND App" />
-  <figcaption>MIND App Running</figcaption>
-</figure>
+![Jenkins Dashboard](screenshots/jenkins-dashboard.png)
 
-<figure class="shot">
-  <img src="screenshots/api-health.png" alt="API Health" />
-  <figcaption>API Health 200 OK</figcaption>
-</figure>
+**What it shows:** The Jenkins CI/CD server dashboard showing the pipeline job.
 
-<figure class="shot">
-  <img src="screenshots/argocd-synced.png" alt="ArgoCD Synced" />
-  <figcaption>ArgoCD Synced / Healthy</figcaption>
-</figure>
+**Evidence:** Jenkins is live and accessible at [http://depi-jenkins-depi.duckdns.org:8080](http://depi-jenkins-depi.duckdns.org:8080)
 
-<figure class="shot">
-  <img src="screenshots/argocd-self-heal.png" alt="ArgoCD Self-Heal" />
-  <figcaption>ArgoCD Self-Healing Test</figcaption>
-</figure>
+---
 
-</div>
+## Jenkins — Successful Build (Early)
+
+![Jenkins Build Success](screenshots/jenkins-build-success.png)
+
+**What it shows:** An early successful Jenkins pipeline build.
+
+**Evidence:** The pipeline was running and completing successfully from the beginning of the project.
+
+---
+
+## Jenkins — Build #8 (Final with Security Tools)
+
+![Jenkins Build 8 Success](screenshots/jenkins-build-8-success.png)
+
+**What it shows:** Jenkins Build #8 — the final build that includes all stages: Gitleaks, SonarQube, Docker Build, Trivy, and DockerHub Push.
+
+**Evidence:** All stages completed successfully in a single pipeline run.
+
+---
+
+## Jenkins Console — Gitleaks Scan
+
+![Jenkins Gitleaks Console](screenshots/jenkins-gitleaks-console.png)
+
+**What it shows:** The Jenkins console output from the Gitleaks stage showing the scan completed with no leaks detected.
+
+**Key output:**
+```
+Successfully pulled gitleaks/gitleaks:latest
+...
+No leaks found
+```
+
+**Evidence:** Secret scanning is integrated into the pipeline and running before any build occurs.
+
+---
+
+## Jenkins Console — SonarQube Scan
+
+![Jenkins SonarQube Console](screenshots/jenkins-sonarqube-console.png)
+
+**What it shows:** The Jenkins console output from the SonarQube stage showing the scanner running and uploading analysis results.
+
+**Key output:**
+```
+INFO: Sensor JavaXmlSensor [java]
+INFO: ANALYSIS SUCCESSFUL for project depi-mind-app-v2
+INFO: Note that you will be able to access the updated dashboard once you have executed...
+```
+
+**Evidence:** Code quality scanning is integrated and submitting results to the SonarQube server.
+
+---
+
+## SonarQube Dashboard
+
+![SonarQube Dashboard](screenshots/sonarqube-dashboard.png)
+
+**What it shows:** The SonarQube project dashboard for `DEPI MIND App` showing the analysis results and quality gate status.
+
+**Evidence:** The quality gate passed. The project is visible in SonarQube at [http://depi-jenkins-depi.duckdns.org:9000](http://depi-jenkins-depi.duckdns.org:9000)
+
+---
+
+## Jenkins Console — Trivy Scan
+
+![Jenkins Trivy Console](screenshots/jenkins-trivy-console.png)
+
+**What it shows:** The Jenkins console output from the Trivy image scanning stage showing vulnerability scan results for both Docker images.
+
+**Evidence:** Trivy is integrated into the pipeline and scanning images before they are pushed to DockerHub.
+
+---
+
+## DockerHub — Backend Image
+
+![DockerHub Backend](screenshots/dockerhub-backend.png)
+
+**What it shows:** The DockerHub repository for `fadyy2k/mind-backend` showing published tags including `latest` and build-number tags.
+
+**Evidence:** Backend images are being built and pushed to DockerHub by the Jenkins pipeline.
+
+DockerHub URL: [https://hub.docker.com/r/fadyy2k/mind-backend](https://hub.docker.com/r/fadyy2k/mind-backend)
+
+---
+
+## DockerHub — Frontend Image
+
+![DockerHub Frontend](screenshots/dockerhub-frontend.png)
+
+**What it shows:** The DockerHub repository for `fadyy2k/mind-frontend` showing published tags including `latest` and build-number tags.
+
+**Evidence:** Frontend images are being built and pushed to DockerHub by the Jenkins pipeline.
+
+DockerHub URL: [https://hub.docker.com/r/fadyy2k/mind-frontend](https://hub.docker.com/r/fadyy2k/mind-frontend)
+
+---
+
+## Kubernetes — Pods and Services
+
+![K3s Pods](screenshots/k3s-pods.png)
+
+**What it shows:** The output of `kubectl get nodes`, `kubectl get pods -n mind`, and `kubectl get svc -n mind`.
+
+**Evidence:**
+- K3s node is `Ready`
+- `mind-frontend` pod is `1/1 Running`
+- `mind-backend` pod is `1/1 Running`
+- `postgres` pod is `1/1 Running`
+- All services are correctly configured
+
+---
+
+## MIND Notes App — Running
+
+![MIND App](screenshots/mind-app.png)
+
+**What it shows:** The live MIND Notes App accessible in the browser.
+
+**Evidence:** The full application is deployed and functional at [http://depi-k3s-depi.duckdns.org:30080](http://depi-k3s-depi.duckdns.org:30080)
+
+Demo credentials: `demo@example.com` / `demo123456`
+
+---
+
+## API Health Endpoint
+
+![API Health](screenshots/api-health.png)
+
+**What it shows:** The browser showing the API health endpoint response.
+
+**Response:**
+```json
+{"message":"Notes API is running","status":"ok"}
+```
+
+**Evidence:** The backend Go API is running, healthy, and reachable through the Kubernetes NodePort.
+
+URL: [http://depi-k3s-depi.duckdns.org:30080/api/health](http://depi-k3s-depi.duckdns.org:30080/api/health)
+
+---
+
+## ArgoCD — Synced and Healthy
+
+![ArgoCD Synced](screenshots/argocd-synced.png)
+
+**What it shows:** The ArgoCD dashboard showing the `mind-app` application with status **Synced** and **Healthy**.
+
+**Evidence:** All Kubernetes resources are deployed, running, and matching the Git-declared state.
+
+ArgoCD URL: [http://depi-k3s-depi.duckdns.org:32000](http://depi-k3s-depi.duckdns.org:32000)
+
+---
+
+## ArgoCD — Self-Healing Proof
+
+![ArgoCD Self-Heal](screenshots/argocd-self-heal.png)
+
+**What it shows:** Evidence of ArgoCD self-healing after the frontend deployment was manually scaled to zero replicas.
+
+**The test:**
+1. `kubectl scale deployment mind-frontend -n mind --replicas=0` was run
+2. The frontend pod terminated
+3. ArgoCD detected drift from the desired Git state
+4. ArgoCD restored the deployment to 1 replica within ~90 seconds
+5. ArgoCD returned to **Synced** and **Healthy**
+
+**Evidence:** GitOps self-healing is working correctly.
+
+---
+
+## Evidence Summary
+
+| # | Screenshot | Stage | Result |
+|---|---|---|---|
+| 1 | `github-repo.png` | Source Control | Repository visible ✓ |
+| 2 | `mkdocs-home.png` | Documentation | Live docs ✓ |
+| 3 | `jenkins-dashboard.png` | CI/CD | Jenkins running ✓ |
+| 4 | `jenkins-build-success.png` | CI/CD | Pipeline success ✓ |
+| 5 | `jenkins-build-8-success.png` | CI/CD | Full pipeline ✓ |
+| 6 | `jenkins-gitleaks-console.png` | Security | No leaks found ✓ |
+| 7 | `jenkins-sonarqube-console.png` | Security | Analysis uploaded ✓ |
+| 8 | `sonarqube-dashboard.png` | Security | Quality gate passed ✓ |
+| 9 | `jenkins-trivy-console.png` | Security | Images scanned ✓ |
+| 10 | `dockerhub-backend.png` | Registry | Image published ✓ |
+| 11 | `dockerhub-frontend.png` | Registry | Image published ✓ |
+| 12 | `k3s-pods.png` | Kubernetes | All pods running ✓ |
+| 13 | `mind-app.png` | Application | App live ✓ |
+| 14 | `api-health.png` | Application | API healthy ✓ |
+| 15 | `argocd-synced.png` | GitOps | Synced + Healthy ✓ |
+| 16 | `argocd-self-heal.png` | GitOps | Self-healing proven ✓ |
