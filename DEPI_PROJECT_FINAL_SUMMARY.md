@@ -30,7 +30,7 @@ Jenkins server:
 
 - Name: depi-jenkins-server
 - Public IP: 18.201.218.207
-- Jenkins URL: http://18.201.218.207:8080
+- Jenkins URL: http://depi-jenkins-depi.duckdns.org:8080
 
 K3s server:
 
@@ -103,11 +103,11 @@ Main resources:
 
 Application URL:
 
-- http://52.19.23.63:30080
+- http://depi-k3s-depi.duckdns.org:30080
 
 API health URL:
 
-- http://52.19.23.63:30080/api/health
+- http://depi-k3s-depi.duckdns.org:30080/api/health
 
 Demo login:
 
@@ -118,7 +118,7 @@ Demo login:
 
 ArgoCD URL:
 
-- http://52.19.23.63:32000
+- http://depi-k3s-depi.duckdns.org:32000
 
 ArgoCD application:
 
