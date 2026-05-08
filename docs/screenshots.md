@@ -36,7 +36,15 @@ The Jenkins pipeline completed successfully and pushed Docker images to DockerHu
 
 ---
 
-## 5. Jenkins Trivy Scan Output
+## 5. Jenkins Gitleaks Secret Scan
+
+The Jenkins pipeline runs Gitleaks before building Docker images to check the repository for leaked secrets. Build #5 completed with no leaks found.
+
+![Jenkins Gitleaks Console](screenshots/jenkins-gitleaks-console.png)
+
+---
+
+## 6. Jenkins Trivy Scan Output
 
 Trivy security scanning is integrated into the Jenkins pipeline in report-only mode.
 
@@ -44,7 +52,7 @@ Trivy security scanning is integrated into the Jenkins pipeline in report-only m
 
 ---
 
-## 6. DockerHub Backend Image
+## 7. DockerHub Backend Image
 
 The backend Docker image was built by Jenkins and pushed to DockerHub with versioned tags.
 
@@ -52,7 +60,7 @@ The backend Docker image was built by Jenkins and pushed to DockerHub with versi
 
 ---
 
-## 7. DockerHub Frontend Image
+## 8. DockerHub Frontend Image
 
 The frontend Docker image was built by Jenkins and pushed to DockerHub with versioned tags.
 
@@ -60,7 +68,7 @@ The frontend Docker image was built by Jenkins and pushed to DockerHub with vers
 
 ---
 
-## 8. K3s Kubernetes Resources
+## 9. K3s Kubernetes Resources
 
 The application is deployed on a single-node K3s Kubernetes cluster running on AWS EC2.
 
@@ -68,7 +76,7 @@ The application is deployed on a single-node K3s Kubernetes cluster running on A
 
 ---
 
-## 9. MIND App Running
+## 10. MIND App Running
 
 The MIND Notes App is publicly accessible through the K3s NodePort service and DuckDNS.
 
@@ -76,7 +84,7 @@ The MIND Notes App is publicly accessible through the K3s NodePort service and D
 
 ---
 
-## 10. API Health Check
+## 11. API Health Check
 
 The backend API health endpoint confirms that the frontend proxy and backend service are working.
 
@@ -84,7 +92,7 @@ The backend API health endpoint confirms that the frontend proxy and backend ser
 
 ---
 
-## 11. ArgoCD Synced and Healthy
+## 12. ArgoCD Synced and Healthy
 
 ArgoCD manages the Kubernetes deployment from the GitHub repository and keeps the application synced.
 
@@ -92,7 +100,7 @@ ArgoCD manages the Kubernetes deployment from the GitHub repository and keeps th
 
 ---
 
-## 12. ArgoCD Self-Healing Test
+## 13. ArgoCD Self-Healing Test
 
 A live drift test was performed by scaling the frontend deployment to zero replicas. ArgoCD detected the drift and restored the application back to the desired state from Git.
 
