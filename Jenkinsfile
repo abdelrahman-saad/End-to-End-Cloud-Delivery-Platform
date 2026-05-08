@@ -48,6 +48,27 @@ pipeline {
             }
         }
 
+        stage('SonarQube Code Scan') {
+            steps {
+                withCredentials([string(credentialsId: 'sonarqube-token', variable: 'SONAR_TOKEN')]) {
+                    sh '''
+                        echo "========== SonarQube Code Scan =========="
+
+                        docker run --rm \
+                          --network host \
+                          -v "$PWD:/usr/src" \
+                          sonarsource/sonar-scanner-cli:latest \
+                          -Dsonar.projectKey=depi-mind-app-v2 \
+                          -Dsonar.projectName="DEPI MIND App" \
+                          -Dsonar.sources=/usr/src/MIND/backend,/usr/src/MIND/frontend \
+                          -Dsonar.host.url=http://localhost:9000 \
+                          -Dsonar.token=$SONAR_TOKEN \
+                          -Dsonar.exclusions=**/node_modules/**,**/dist/**,**/build/**,**/.git/**,**/vendor/** || true
+                    '''
+                }
+            }
+        }
+
         stage('Build Backend Image') {
             steps {
                 sh '''
